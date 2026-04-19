@@ -248,69 +248,7 @@
 
 <body>
 
-    <div id="welcomeScreen"
-        style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--color-purple); z-index: 10000; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease;">
-        <h1 style="color: var(--color-green); font-size: 3em; text-align: center; margin-bottom: 30px;">✨ 暗恋我吗？</h1>
-        <button class="btn" onclick="enterSite()">🌟 是的！ 🌟</button>
-    </div>
 
-    <audio id="myAudio">
-        <source src="audio.mp3" type="audio/mpeg">
-    </audio>
-
-    <div id="musicBtn" onclick="toggleMusic()"
-        style="position: fixed; bottom: 20px; right: 20px; font-size: 40px; cursor: pointer; z-index: 9999; display: none;">
-        🎵
-    </div>
-
-    <script>
-        var audio = document.getElementById("myAudio");
-        var btn = document.getElementById("musicBtn");
-        var welcome = document.getElementById("welcomeScreen");
-        var isPlaying = false;
-
-        if (window.location.hash === "#photos") {
-            welcome.style.display = "none"; // 直接把紫色的门拆掉（隐藏）
-            btn.style.display = "block";    // 显示右下角的音乐图标
-            audio.currentTime = 95;
-
-            // 顺便帮你自动滑到精确的位置（为了以防万一）
-            setTimeout(() => {
-                document.getElementById("photos").scrollIntoView({ behavior: 'smooth' });
-            }, 100);
-        }
-        // 当点击“点击开启魔法”时执行的函数
-        function enterSite() {
-            // 1. 让开门界面消失
-            welcome.style.opacity = "0";
-            setTimeout(() => { welcome.style.display = "none"; }, 500);
-
-            // 2. 显示右下角的音乐小图标
-            btn.style.display = "block";
-
-            // 3. 空降到第 15 秒并开始播放音乐！(这里的15你可以随便改)
-            audio.currentTime = 95;
-            audio.play();
-            isPlaying = true;
-        }
-
-        // 控制右下角音乐图标暂停/播放的函数
-        function toggleMusic() {
-            if (isPlaying) {
-                audio.pause();
-                btn.innerText = "🔇";
-            } else {
-                audio.play();
-                btn.innerText = "🎵";
-            }
-            isPlaying = !isPlaying;
-
-            audio.addEventListener('ended', function () {
-                this.currentTime = 95; // 结束后跳回 95 秒
-                this.play();           // 继续播放
-            }, false);
-        }
-    </script>
     <header>
         <img src="img/me2.jpeg" alt="我的头像" class="profile-img" id="myAvatar">
         <h1>不要Stalk我！</h1>
@@ -407,7 +345,42 @@
         });
     </script>
 
+    <audio id="myAudio">
+        <source src="audio.mp3" type="audio/mpeg">
+    </audio>
 
+    <div id="musicBtn" onclick="toggleMusic()"
+        style="position: fixed; bottom: 20px; right: 20px; font-size: 40px; cursor: pointer; z-index: 9999;">
+        🔇
+    </div>
+
+    <script>
+        var audio = document.getElementById("myAudio");
+        var btn = document.getElementById("musicBtn");
+        var isPlaying = false;
+        var isFirstTime = true; // 🌟 加了一个小标记：记录是不是第一次点播放
+
+        function toggleMusic() {
+            if (isPlaying) {
+                audio.pause();
+                btn.innerText = "🔇"; // 暂停
+            } else {
+                // 如果是第一次播放，就施展空降魔法！
+                if (isFirstTime) {
+                    audio.currentTime = 95; // 👈 这里的 15 就是秒数！你可以随便改成你想空降的秒数
+                    isFirstTime = false;    // 标记为已经播放过了，下次再点继续就不会重头跳了
+                }
+                audio.play();
+                btn.innerText = "🎵"; // 播放
+            }
+            isPlaying = !isPlaying;
+
+            audio.addEventListener('ended', function () {
+                this.currentTime = 95; // 结束后跳回 95 秒
+                this.play();           // 继续播放
+            }, false);
+        }
+    </script>
 </body>
 
 </html>
