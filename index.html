@@ -269,6 +269,16 @@
         var welcome = document.getElementById("welcomeScreen");
         var isPlaying = false;
 
+        if (window.location.hash === "#photos") {
+            welcome.style.display = "none"; // 直接把紫色的门拆掉（隐藏）
+            btn.style.display = "block";    // 显示右下角的音乐图标
+            audio.currentTime = 95;
+
+            // 顺便帮你自动滑到精确的位置（为了以防万一）
+            setTimeout(() => {
+                document.getElementById("photos").scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
         // 当点击“点击开启魔法”时执行的函数
         function enterSite() {
             // 1. 让开门界面消失
