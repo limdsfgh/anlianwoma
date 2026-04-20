@@ -305,7 +305,7 @@
         .flip-card-front {
             background-color: var(--color-white);
             padding: 40px 20px;
-             height: 100%;
+            height: 100%;
             /* 撑开卡片高度 */
             position: relative;
             /* 为了让背面的绝对定位有个参考，也为了顶部的紫色线 */
@@ -393,6 +393,94 @@
             animation-delay: 1s;
         }
 
+        /* === 🌟 MBTI 区块 === */
+        #mbti {
+            background-color: var(--color-green);
+            padding: 60px 20px;
+            /*height: 90vh;*/
+        }
+
+        .mbti-container {
+            display: flex;
+            align-items: center;
+            /* 让图片和文字在垂直方向居中对齐 */
+            justify-content: center;
+            gap: 10%;
+            /* 图片和文字之间的距离 */
+            max-width: 900px;
+            margin: 0 auto;
+            /*padding-top: 15%;*/
+        }
+
+        .mbti-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        /* 纯享版照片：没有框框、没有阴影 */
+        .mbti-image img {
+            width: 100%;
+            max-width: 350px;
+            /* 限制一下图片最大尺寸，免得太大 */
+            border: none;
+            box-shadow: none;
+            border-radius: 0;
+        }
+
+        .mbti-text {
+            flex: 1;
+            color: var(--color-text);
+        }
+
+        #mbti>h2 {
+            text-align: center;
+            color: var(--color-purple);
+            /* 标题用紫色 */
+            font-size: 2.5em;
+            position: relative;
+            display: block;
+            /* 设为块级元素方便居中 */
+            margin-bottom: 60px;
+            /* 🌟 重点：这里控制标题和下面内容的距离 */
+        }
+
+        /* 2. 画标题下面的那条线 */
+        #mbti>h2::after {
+            content: '';
+            display: block;
+            width: 80%;
+            /* 线的长度 */
+            height: 5px;
+            /* 线的粗细 */
+            background-color: var(--color-white);
+            /* 🌟 绿底配白线，非常清新 */
+            border-radius: 10px;
+            margin: 10px auto 0;
+            /* 居中这条线 */
+        }
+
+        /* 覆盖掉全局 H2 的居中设定，让这里的标题靠左 */
+        .mbti-text h2 {
+            color: var(--color-purple);
+            text-align: left;
+            left: 0;
+            transform: none;
+            margin-bottom: 20px;
+        }
+
+        /* 绿底上的装饰线改成白色的，更显眼 */
+        .mbti-text h2::after {
+            margin: 5px 0 0 0;
+            width: 80px;
+            background-color: var(--color-white);
+        }
+
+        .mbti-text p {
+            font-size: 1.2em;
+            line-height: 1.8;
+            font-weight: bold;
+        }
+
         @keyframes float {
             0% {
                 transform: translateY(0px) rotate(0deg);
@@ -432,6 +520,35 @@
             .profile-img {
                 width: 120px;
                 height: 120px;
+            }
+
+            /* 加在 @media (max-width: 600px) 里面！ */
+            .mbti-container {
+                flex-direction: column;
+                /* 垂直排列：上图下文 */
+                gap: 20px;
+                /* 缩小间距 */
+            }
+
+            .mbti-text h2 {
+                text-align: center;
+                /* 手机端标题居中 */
+            }
+
+            .mbti-text h2::after {
+                margin: 5px auto 0;
+                /* 装饰线也居中 */
+            }
+
+            .mbti-text {
+                text-align: center;
+                /* 手机端文字居中 */
+            }
+
+            .mbti-image img {
+                width: 100%;
+                max-width: 250px;
+
             }
         }
     </style>
@@ -541,6 +658,24 @@
                     </div>
                 </div>
 
+            </div>
+        </section>
+
+        <section id="mbti">
+            <h2>我的MBTI</h2>
+
+            <div class="mbti-container">
+                <div class="mbti-image">
+                    <img src="img/isfp3.png" alt="我是 ISFP">
+                </div>
+
+                <div class="mbti-text">
+                    <h2>ISFP 小探险家 🎨</h2>
+                    <p>
+                        走一步看一步 实在不行鼠半路<br>
+                        “我都行” “别管我” “随便” “到时候再讲” “不得空” “关你屁事”
+                    </p>
+                </div>
             </div>
         </section>
         <!--
