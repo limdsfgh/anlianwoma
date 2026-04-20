@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>你也为我啄米吧 🌟</title>
+    <title>你也为我啄米吧 😉</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=ZCOOL+KuaiLe&display=swap"
         rel="stylesheet">
 
@@ -33,6 +33,7 @@
             color: var(--color-text);
             line-height: 1.6;
             overflow-x: hidden;
+
         }
 
         /* 容器限制最大宽度并居中 */
@@ -87,7 +88,7 @@
         h2 {
             text-align: center;
             color: var(--color-purple);
-            margin-bottom: 30px;
+            /*margin-bottom: 30px;*/
             font-size: 2em;
             position: relative;
             display: inline-block;
@@ -99,7 +100,7 @@
             content: '';
             display: block;
             width: 90vw;
-            height: 8px;
+            height: 5px;
             background-color: var(--color-green);
             border-radius: 10px;
             margin: 5px auto 0;
@@ -112,6 +113,7 @@
             gap: 20px;
             justify-content: center;
             margin-bottom: 50px;
+            padding-top: 2%;
         }
 
         /* 卡片样式 */
@@ -206,32 +208,220 @@
         #photos {
             background-color: var(--color-green);
             /* 这里调用了之前定义的 #BBFF16 */
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.6) 2px, transparent 2px),
+                /* 横线，0.4是透明度 */
+                linear-gradient(90deg, rgba(255, 255, 255, 0.6) 2px, transparent 2px);
+            /* 竖线 */
+            background-size: 80px 80px;
+            /* 控制格子的大小，数字越大格子越大 */
             padding: 5%;
             /* 增加内边距，让内容不要太靠边 */
-            border-radius: 0 0 30px 30px;
+            /* border-radius: 0 0 30px 30px;*/
             /* 加上圆角，保持可爱的风格 */
             /*  margin-bottom: 50px;*/
             /* 底部留出一点空间 */
         }
 
+        #photos p {
+            text-align: center;
+            color: var(--color-text);
+            font-size: 1em;
+        }
+
+        #interests {
+            background-color: var(--color-purple);
+
+            padding: 5%;
+            ;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.6) 2px, transparent 2px),
+                /* 横线，0.4是透明度 */
+                linear-gradient(90deg, rgba(255, 255, 255, 0.6) 2px, transparent 2px);
+            /* 竖线 */
+            background-size: 80px 80px;
+        }
+
+        #interests h2 {
+            text-align: center;
+            color: var(--color-green);
+            /*margin-bottom: 30px;*/
+            font-size: 2em;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #interests .card {
+            background-color: transparent;
+            /* 去掉底色 */
+            border: none;
+            /* 去掉外边框，移到内部 */
+            padding: 0;
+            /* 去掉内边距 */
+            box-shadow: none;
+            perspective: 1000px;
+            /* 🌟 开启 3D 景深！ */
+        }
+
+        #interests .card:hover {
+            transform: none;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            /* 带一点Q弹的翻转动画 */
+            transform-style: preserve-3d;
+            /* 保持 3D 空间 */
+        }
+
+        /* 鼠标悬停时，内层翻转 180 度 */
+        #interests .card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        /* 3. 正面和背面通用的样式 */
+        .flip-card-front,
+        .flip-card-back {
+            width: 100%;
+            -webkit-backface-visibility: hidden;
+            /* Safari 兼容 */
+            backface-visibility: hidden;
+            /* 翻转到背面时隐藏内容 */
+            border: 5px solid var(--color-green);
+            /* 绿色的外框 */
+            border-radius: 25px;
+            /* 可爱的圆角 */
+            overflow: hidden;
+            /* 保证图片不会超出圆角 */
+        }
+
+        /* 4. 卡片正面 */
+        .flip-card-front {
+            background-color: var(--color-white);
+            padding: 40px 20px;
+             height: 100%;
+            /* 撑开卡片高度 */
+            position: relative;
+            /* 为了让背面的绝对定位有个参考，也为了顶部的紫色线 */
+        }
+
+        /* 5. 卡片背面 */
+        .flip-card-back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            /* 和正面一样高 */
+            background-color: var(--color-purple);
+            transform: rotateY(180deg);
+            /* 初始状态是转过去的 */
+        }
+
+        /* 6. 背面的照片铺满 */
+        #interests .flip-card-back img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* 保证照片铺满且不变形 */
+            margin: 0;
+            /* 覆盖之前的 margin */
+            aspect-ratio: auto;
+            /* 覆盖之前正方形的设定，适应卡片高度 */
+            display: block;
+        }
+
+        #more-about-me {
+            background-color: var(--color-white);
+            text-align: center;
+            padding: 60px 20px;
+            margin: 20px 0;
+            /* 上下留一点空隙 */
+        }
+
+        #more-about-me h2 {
+            color: var(--color-purple);
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        /* 为了让这个白底区块显得更精致，把这里的大标题绿线调短一点 */
+        #more-about-me h2::after {
+            width: 80%;
+            height: 5px;
+        }
+
+        #more-about-me p {
+            font-size: 1.2em;
+            color: var(--color-text);
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        /* 🌟 可爱漂浮动画魔法 🌟 */
+        .cute-decorations {
+            font-size: 2.5em;
+            /* 表情的大小 */
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            /* 表情之间的间距 */
+        }
+
+        .floating-emoji {
+            display: inline-block;
+            animation: float 2s ease-in-out infinite alternate;
+        }
+
+        /* 让每个表情浮动的时间错开，显得更灵动不会死板 */
+        .floating-emoji:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .floating-emoji:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .floating-emoji:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-15px) rotate(15deg);
+            }
+
+            /* 向上浮动并微微摇摆 */
+        }
 
         /* === 响应式设计 (Tablet & Mobile) === */
 
         /* 平板尺寸 (最大宽度 900px) */
         @media (max-width: 900px) {
-            .card {
+
+            .card,
+            #interests .card {
                 width: calc(50% - 20px);
-                /* 平板端显示2列 */
             }
         }
 
         /* 手机尺寸 (最大宽度 600px) */
         @media (max-width: 600px) {
-            .card {
+
+            .card,
+            #interests .card {
                 width: 90%;
-                /* 把 100% 改成 90%，左右就会自动空出空间了 */
                 margin: 0 auto;
-                /* 加上这行，确保卡片乖乖呆在正中间 */
             }
 
             h1 {
@@ -251,7 +441,7 @@
 
     <header>
         <img src="img/me2.jpeg" alt="我的头像" class="profile-img" id="myAvatar">
-        <h1>不要Stalk我！</h1>
+        <h1>不要Stalk我！😡</h1>
         <p class="bio">喜欢我不是人之常情吗 毕竟我又漂亮 又善良 又能搞笑 又能正经 又能甜美 又有爱心 又有上进心 试问谁能抵挡我的魅力？</p>
         <button class="btn" onclick="sayHello()">点击向我告白</button>
     </header>
@@ -259,7 +449,8 @@
     <div class="container">
 
         <section id="photos">
-            <h2>为什么会喜欢我？</h2>
+            <h2>为什么会喜欢我？🤔</h2>
+            <p>点击以下卡片 选择你的原因</p>
             <div class="grid-container">
                 <div class="card" onclick="window.location.href='beauty.html'">
                     <img src="img/Me.jpeg" alt="照片1">
@@ -276,27 +467,82 @@
             </div>
         </section>
 
-        <!--<section id="interests">
-            <h2>✨ 我的兴趣</h2>
-            <div class="grid-container">
-                <div class="card">
-                    <h3 style="font-size: 3em; margin: 20px 0;">🎨</h3>
-                    <h3>画画与设计</h3>
-                    <p>喜欢用色彩和线条表达脑海中奇奇怪怪的想法。</p>
-                </div>
-                <div class="card">
-                    <h3 style="font-size: 3em; margin: 20px 0;">🎮</h3>
-                    <h3>打游戏</h3>
-                    <p>周末最爱窝在沙发上玩 Switch 或是电脑游戏。</p>
-                </div>
-                <div class="card">
-                    <h3 style="font-size: 3em; margin: 20px 0;">🐱</h3>
-                    <h3>吸猫</h3>
-                    <p>对所有毛茸茸的小动物毫无抵抗力！</p>
-                </div>
+        <section id="more-about-me">
+            <h2>还没看够？</h2>
+            <p>那就让你再了解我多一点！👇</p>
+
+            <div class="cute-decorations">
+                <span class="floating-emoji">✨</span>
+                <span class="floating-emoji">👻</span>
+                <span class="floating-emoji">💖</span>
             </div>
+
+            <button class="btn" onclick="document.getElementById('interests').scrollIntoView({ behavior: 'smooth' });">
+                继续探索
+            </button>
         </section>
 
+        <section id="interests">
+            <h2>✨ 我的兴趣</h2>
+            <div class="grid-container">
+
+                <div class="card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h3 style="font-size: 3em; margin: 20px 0;">😴</h3>
+                            <h3>睡觉</h3>
+                            <p>睡觉真的好 大家都喜欢睡觉 晚上睡得香 白天睡得甜 有阳光的时候睡 阴天的时候睡 下雨天听雨声睡 冬天蜷在被窝里睡 无聊的时候睡 疲惫的时候睡 小睡怡情 大睡舒爽 熊爱睡觉
+                                全世界的人都爱睡觉</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <img src="img/sleep.jpeg" alt="睡美人">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h3 style="font-size: 3em; margin: 20px 0;">📱</h3>
+                            <h3>玩手机</h3>
+                            <p>你亮屏时清晰的光影
+                                你播放时动听的旋律 你握在掌心温润的触感 你盛满回忆的相册
+                                你弹出消息时轻轻的震动
+                                你续航在线时安心的陪伴 你导航时精准的指引 你聊天时暖心的字句
+                                你播放音乐时的治愈 你总存着我的草稿 你加载时的转圈 你干净的界面
+                                你多样的功能
+                                你解锁时的便捷
+                                你的桀骜不羁
+                                你做事的干脆利索
+                                你偶尔卡顿的小脾气
+                                你的所有所有
+                                你有时强大有时需要充电
+                                我喜欢你任何样子
+                                包括你的型号
+                                一笔一划刻在我心</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <img src="img/play.jpeg" alt="美女玩手机">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h3 style="font-size: 3em; margin: 20px 0;">🫩</h3>
+                            <h3>熬夜</h3>
+                            <p>不知道 我的作息很微妙</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <img src="img/ay.jpeg" alt="5点了？">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!--
         <section id="hobbies">
             <h2>🎧 业余爱好</h2>
             <div class="grid-container">
@@ -350,7 +596,7 @@
     </audio>
 
     <div id="musicBtn" onclick="toggleMusic()"
-        style="position: fixed; bottom: 20px; right: 20px; font-size: 40px; cursor: pointer; z-index: 9999;">
+        style="position: fixed; top: 20px; right: 20px; font-size: 40px; cursor: pointer; z-index: 9999;">
         🔇
     </div>
 
