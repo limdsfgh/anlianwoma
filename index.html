@@ -945,6 +945,158 @@
         }
 
 
+        #crazy-ending {
+            background: linear-gradient(145deg, #fff5fb 0%, #f9f0ff 100%);
+            padding: 80px 20px 90px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-top: 8px dashed #BBFF16;
+            border-bottom: 8px dashed #BBFF16;
+            font-family: 'Nunito', 'ZCOOL KuaiLe', sans-serif;
+            isolation: isolate;
+        }
+
+        .ending-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 5;
+        }
+
+        .ending-title {
+            font-size: 3.2em;
+            color: #8A67F9;
+            text-shadow: 5px 5px 0 #BBFF16;
+            margin-bottom: 20px;
+            letter-spacing: 4px;
+            animation: wobble 2.5s infinite;
+        }
+
+        .ending-sub {
+            font-size: 1.3em;
+            color: #b18df2;
+            margin-bottom: 50px;
+            font-weight: bold;
+        }
+
+        .danger-btn {
+            background: #ff4d6d;
+            color: white;
+            font-size: 2.8em;
+            font-weight: 900;
+            padding: 25px 70px;
+            border: none;
+            border-radius: 120px;
+            box-shadow: 0 20px 0 #a01b3a, 0 25px 30px rgba(255, 77, 109, 0.4);
+            cursor: pointer;
+            font-family: 'ZCOOL KuaiLe', cursive;
+            letter-spacing: 8px;
+            transition: all 0.08s ease;
+            border: 5px solid #ffeaa6;
+            text-shadow: 3px 3px 0 #a01b3a;
+            transform: rotate(-2deg);
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .danger-btn:hover {
+            transform: rotate(1deg) scale(1.02);
+            box-shadow: 0 18px 0 #a01b3a, 0 30px 40px rgba(255, 77, 109, 0.5);
+            background: #ff5e7e;
+        }
+
+        .danger-btn:active {
+            transform: translateY(12px) rotate(0deg);
+            box-shadow: 0 8px 0 #a01b3a, 0 20px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .danger-btn.broken {
+            background: #b0b0b0;
+            box-shadow: 0 8px 0 #5e5e5e, 0 10px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(12px) rotate(1deg);
+            color: #3a3a3a;
+            text-shadow: none;
+            border-color: #ddd;
+            pointer-events: none;
+            font-size: 2.2em;
+            padding: 25px 40px;
+        }
+
+        .secret-message {
+            margin-top: 40px;
+            font-size: 2em;
+            color: #8A67F9;
+            background: rgba(255, 255, 240, 0.8);
+            backdrop-filter: blur(8px);
+            display: inline-block;
+            padding: 18px 45px;
+            border-radius: 60px;
+            border: 4px solid #BBFF16;
+            box-shadow: 0 15px 0 #c7adff;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            font-weight: bold;
+        }
+
+        .secret-message.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        #confetti-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            will-change: transform;
+        }
+
+        .ending-footer {
+            margin-top: 60px;
+            color: #bba6f0;
+            font-size: 1.2em;
+        }
+
+        @keyframes wobble {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(-1deg);
+            }
+
+            50% {
+                transform: translateY(-8px) rotate(2deg);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .ending-title {
+                font-size: 2.3em;
+            }
+
+            .danger-btn {
+                font-size: 2em;
+                padding: 18px 35px;
+            }
+            .danger-btn.broken{
+                font-size: 1.5em;
+            }
+
+            .secret-message {
+                font-size: 1.5em;
+            }
+
+            .ending-footer{
+                 font-size: 1em;
+            }
+        }
+
         /* === 响应式设计 (Tablet & Mobile) === */
 
         /* 平板尺寸 (最大宽度 900px) */
@@ -1356,9 +1508,24 @@
 
     </div>
 
-    <!--<footer>
-        <p>Made with <span class="heart">♥</span> by [你的名字] © 2026</p>
-    </footer>-->
+    <section id="crazy-ending">
+        <canvas id="confetti-canvas"></canvas>
+
+        <div class="ending-container">
+            <div class="ending-title">🌸 表白区域 🌸</div>
+            <div class="ending-sub">—— 看完了还是喜欢我？ ——</div>
+
+            <button class="danger-btn" id="doNotPressBtn">🔥 我喜欢你 🔥</button>
+
+            <div id="loveMessage" class="secret-message">
+                👍都跟你说你是好人了咯👍
+            </div>
+
+            <div class="ending-footer">
+                <span>🐣 感谢你花这么宝贵的时间 来看我做的废废网站 🐣</span>
+            </div>
+        </div>
+    </section>
 
     <script>
         // 按钮点击事件
@@ -1507,6 +1674,171 @@
         })();
     </script>
 
+    <script>
+        (function () {
+            "use strict";
+
+            const btn = document.getElementById('doNotPressBtn');
+            const msg = document.getElementById('loveMessage');
+            const canvas = document.getElementById('confetti-canvas');
+            const ctx = canvas.getContext('2d', { alpha: true, willReadFrequently: false });
+
+            let animationFrame = null;
+            let particles = [];
+            let isExploding = false;
+
+            // 轻量表情库（减少数量）
+            const emojis = ['💖', '✨', '🌟', '💫', '🎈', '🎉', '💕', '😍', '🥰', '🦄', '🌸', '🍭', '🧸'];
+
+            function resizeCanvas() {
+                const section = document.getElementById('crazy-ending');
+                canvas.width = section.offsetWidth;
+                canvas.height = section.offsetHeight;
+            }
+
+            // 优化：减少粒子数量至 25~30 个，移除阴影渲染
+            function createParticles(x, y) {
+                const count = 28;  // 流畅不卡
+                for (let i = 0; i < count; i++) {
+                    const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = 3 + Math.random() * 10;
+                    const size = 22 + Math.floor(Math.random() * 28);
+                    particles.push({
+                        x: x || canvas.width / 2,
+                        y: y || canvas.height / 2,
+                        vx: Math.cos(angle) * speed * (0.7 + Math.random() * 0.8),
+                        vy: Math.sin(angle) * speed * (0.7 + Math.random() * 0.8),
+                        size: size,
+                        emoji: emoji,
+                        alpha: 1,
+                        gravity: 0.12,
+                        fade: 0.009,
+                        rotation: Math.random() * 360,
+                        rotSpeed: (Math.random() - 0.5) * 10
+                    });
+                }
+            }
+
+            function updateParticles() {
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += p.gravity;
+                    p.vx *= 0.99;
+                    p.vy *= 0.99;
+                    p.alpha -= p.fade;
+                    p.rotation += p.rotSpeed;
+
+                    if (p.alpha <= 0.02) {
+                        particles.splice(i, 1);
+                        continue;
+                    }
+                }
+            }
+
+            function drawParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // 关键优化：不使用阴影，直接绘制
+                for (let p of particles) {
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(p.rotation * Math.PI / 180);
+                    ctx.font = `${p.size}px "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.globalAlpha = p.alpha;
+                    // 移除阴影，大幅提升性能
+                    ctx.fillText(p.emoji, 0, 0);
+                    ctx.restore();
+                }
+            }
+
+            function animate() {
+                if (!isExploding && particles.length === 0) {
+                    animationFrame = null;
+                    return;
+                }
+
+                updateParticles();
+                drawParticles();
+
+                if (particles.length > 0 || isExploding) {
+                    animationFrame = requestAnimationFrame(animate);
+                } else {
+                    animationFrame = null;
+                }
+            }
+
+            function explode() {
+                if (isExploding) return;
+                isExploding = true;
+
+                const rect = btn.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
+                createParticles(centerX, centerY);
+
+                // 只追加一次小爆发，避免堆积
+                setTimeout(() => {
+                    if (particles.length < 80) {
+                        createParticles(centerX - 20, centerY - 10);
+                    }
+                }, 100);
+
+                if (!animationFrame) {
+                    animationFrame = requestAnimationFrame(animate);
+                }
+
+                // 更早结束爆炸状态
+                setTimeout(() => {
+                    isExploding = false;
+                }, 400);
+            }
+
+            function handleClick() {
+                btn.classList.add('broken');
+                btn.textContent = '💔你居然喜欢我💔';
+                msg.classList.add('show');
+                explode();
+                btn.removeEventListener('click', handleClick);
+            }
+
+            // 性能优化：使用 ResizeObserver 防抖
+            let resizeTimeout;
+            const resizeObserver = new ResizeObserver(() => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    const section = document.getElementById('crazy-ending');
+                    if (section) {
+                        canvas.width = section.offsetWidth;
+                        canvas.height = section.offsetHeight;
+                    }
+                }, 50);
+            });
+
+            function init() {
+                const section = document.getElementById('crazy-ending');
+                if (section) {
+                    resizeObserver.observe(section);
+                    canvas.width = section.offsetWidth;
+                    canvas.height = section.offsetHeight;
+                }
+                btn.addEventListener('click', handleClick);
+
+                // 清理资源（可选）
+                window.addEventListener('beforeunload', () => {
+                    if (animationFrame) cancelAnimationFrame(animationFrame);
+                    resizeObserver.disconnect();
+                });
+            }
+
+            init();
+        })();
+    </script>
 
 </body>
 
